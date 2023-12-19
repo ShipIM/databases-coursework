@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--13-create-set-time-start-trigger-1" author="ShipIM">
+        <createProcedure>
+            CREATE FUNCTION set_time_start() RETURNS trigger AS $$
+            BEGIN
+                NEW.time_start := NOW()::date;
+                RETURN NEW;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+        <rollback>
+            DROP FUNCTION set_time_start();
+        </rollback>
+    </changeSet>
+    <changeSet id="19-12-2023--13-create-set-time-start-trigger-2" author="ShipIM">
+        <sql>
+            CREATE TRIGGER set_time_start
+            BEFORE INSERT ON lot_time_information
+            FOR EACH ROW EXECUTE PROCEDURE set_time_start();
+        </sql>
+        <rollback>
+            DROP TRIGGER set_time_start ON lot_time_information;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

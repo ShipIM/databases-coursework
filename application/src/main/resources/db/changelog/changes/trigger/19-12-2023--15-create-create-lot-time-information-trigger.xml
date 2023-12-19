@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--15-create-create-lot-time-information-trigger-1" author="ShipIM">
+        <createProcedure>
+            CREATE FUNCTION create_lot_time_information() RETURNS trigger AS $$
+            BEGIN
+                INSERT INTO lot_time_information(time_start) VALUES (CURRENT_TIMESTAMP);
+                RETURN NULL;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+        <rollback>
+            DROP FUNCTION create_lot_time_information();
+        </rollback>
+    </changeSet>
+    <changeSet id="19-12-2023--15-create-create-lot-time-information-trigger-2" author="ShipIM">
+        <sql>
+            CREATE TRIGGER create_lot_time_information
+            AFTER INSERT ON lot
+            FOR EACH ROW EXECUTE PROCEDURE create_lot_time_information();
+        </sql>
+        <rollback>
+            DROP TRIGGER create_lot_time_information ON lot;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
