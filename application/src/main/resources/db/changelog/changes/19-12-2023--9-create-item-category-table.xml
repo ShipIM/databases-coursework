@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--9-create-item-category-table" author="ShipIM">
+        <createTable tableName="item_category">
+            <column name="item_id" type="INTEGER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="category" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="item_category" baseColumnNames="item_id"
+                                 constraintName="item_category_item_fkey"
+                                 referencedTableName="item"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+        <rollback>
+            <dropTable tableName="item_category"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

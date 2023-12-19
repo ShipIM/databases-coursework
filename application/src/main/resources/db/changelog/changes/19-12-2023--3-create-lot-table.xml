@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--3-create-lot-table" author="ShipIM">
+        <createTable tableName="lot">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_login" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="lot" baseColumnNames="user_login"
+                                 constraintName="lot_user_fkey"
+                                 referencedTableName="_user"
+                                 referencedColumnNames="login" onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="lot" baseColumnNames="item_id"
+                                 constraintName="lot_item_fkey"
+                                 referencedTableName="item"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+        <rollback>
+            <dropTable tableName="lot"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

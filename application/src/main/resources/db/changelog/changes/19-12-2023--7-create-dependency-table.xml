@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--7-create-dependency-table" author="ShipIM">
+        <createTable tableName="dependency">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="item_first_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item_second_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="dependency" baseColumnNames="item_first_id"
+                                 constraintName="dependency_first_item_fkey"
+                                 referencedTableName="item"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="dependency" baseColumnNames="item_second_id"
+                                 constraintName="dependency_second_item_fkey"
+                                 referencedTableName="item"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+        <rollback>
+            <dropTable tableName="dependency"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
