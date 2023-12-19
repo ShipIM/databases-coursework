@@ -18,4 +18,5 @@
     <include file="/db/changelog/changes/trigger/19-12-2023--13-create-set-time-start-trigger.xml"/>
     <include file="/db/changelog/changes/trigger/19-12-2023--14-create-create-lot-status-information-trigger.xml"/>
     <include file="/db/changelog/changes/trigger/19-12-2023--15-create-create-lot-time-information-trigger.xml"/>
+    <include file="/db/changelog/changes/trigger/19-12-2023--16-create-fill-start-price-trigger.xml"/>
 </databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--16-create-fill-start-price-trigger-1" author="ShipIM">
+        <createProcedure>
+            CREATE FUNCTION fill_start_price() RETURNS trigger AS $$
+            BEGIN
+                UPDATE lot_cost_information SET cost_current = cost_start WHERE lot_cost_information.lot_id = NEW.lot_id;
+                RETURN NEW;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+        <rollback>
+            DROP FUNCTION fill_start_price();
+        </rollback>
+    </changeSet>
+    <changeSet id="19-12-2023--16-create-fill-start-price-trigger-2" author="ShipIM">
+        <sql>
+            CREATE TRIGGER fill_start_price
+            AFTER INSERT ON lot_cost_information
+            FOR EACH ROW EXECUTE PROCEDURE fill_start_price();
+        </sql>
+        <rollback>
+            DROP TRIGGER fill_start_price ON lot_cost_information;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
