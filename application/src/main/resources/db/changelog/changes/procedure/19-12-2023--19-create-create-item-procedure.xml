@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--19-create-create-item-procedure" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE PROCEDURE create_item(
+              IN item_id INTEGER,
+              IN name TEXT,
+              IN properties JSONB,
+              IN category TEXT
+            ) AS $$
+            BEGIN
+                INSERT INTO item (id, name, properties)
+                VALUES (item_id, name, properties);
+
+                INSERT INTO item_category (item_id, category)
+                VALUES (item_id, category);
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--17-create-create-user-procedure" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE PROCEDURE create_user(
+              IN login TEXT,
+              IN birth_date DATE,
+              IN registration_date DATE,
+              IN password TEXT
+            ) AS $$
+            BEGIN
+                INSERT INTO _user (login, birth_date, registration_date)
+                VALUES (login, birth_date, registration_date);
+
+                INSERT INTO password (user_login, password)
+                VALUES (login, password);
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

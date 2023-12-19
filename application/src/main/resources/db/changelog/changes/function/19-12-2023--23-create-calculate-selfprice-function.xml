@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--23-create-calculate-selfprice-function" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION calculate_selfprice(IN _item_id INTEGER)
+            RETURNS BIGINT
+            AS $$
+            DECLARE
+                sum BIGINT;
+                temprow INTEGER;
+                curr_price BIGINT;
+            BEGIN
+                sum := 0;
+                curr_price := (SELECT MIN(cost_current) FROM lot
+                JOIN lot_cost_information ON lot.id = lot_cost_information.lot_id
+                JOIN lot_status_information ON lot.id = lot_status_information.lot_id AND lot_status_information.status = 'ACTIVE'
+                WHERE lot.item_id = _item_id
+                GROUP BY item_id);
+                IF EXISTS (SELECT dependency.item_second_id from dependency WHERE dependency.item_first_id = _item_id)
+                THEN
+                    FOR temprow IN (SELECT dependency.item_second_id from dependency WHERE dependency.item_first_id = _item_id)
+                    LOOP
+                        sum := sum + calculate_selfprice(temprow);
+                    END LOOP;
+                ELSE
+                    sum := curr_price;
+                END IF;
+                IF (sum >= curr_price)
+                THEN
+                    RETURN curr_price;
+                ELSE
+                    RETURN sum;
+                END IF;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--22-create-get-active-by-item-name-function" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION get_active_by_item_name(IN _name TEXT)
+            RETURNS table(id INTEGER, user_login TEXT, item_id INTEGER)
+            AS $$
+            BEGIN
+                RETURN QUERY SELECT lot.* FROM lot
+                    JOIN lot_status_information ON lot.id = lot_status_information.lot_id
+                    JOIN item ON lot.item_id = item.id
+                    WHERE item.name = _name AND lot_status_information.status = 'ACTIVE';
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

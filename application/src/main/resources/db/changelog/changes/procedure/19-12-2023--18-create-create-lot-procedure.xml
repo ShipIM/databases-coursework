@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--18-create-create-lot-procedure" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE PROCEDURE create_lot(
+              IN user_login TEXT,
+              IN item_id INTEGER,
+              IN cost_start BIGINT,
+              IN cost_buy BIGINT,
+              IN _time_end TIMESTAMP
+            ) AS $$
+            DECLARE _lot_id INTEGER;
+            BEGIN
+                INSERT INTO lot (user_login, item_id)
+                VALUES (user_login, item_id)
+                    RETURNING lot.id into _lot_id;
+
+                INSERT INTO lot_cost_information (cost_start, cost_buy)
+                VALUES (cost_start, cost_buy);
+
+                UPDATE lot_time_information SET time_end = _time_end
+                WHERE lot_time_information.lot_id = _lot_id;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

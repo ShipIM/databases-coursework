@@ -19,4 +19,11 @@
     <include file="/db/changelog/changes/trigger/19-12-2023--14-create-create-lot-status-information-trigger.xml"/>
     <include file="/db/changelog/changes/trigger/19-12-2023--15-create-create-lot-time-information-trigger.xml"/>
     <include file="/db/changelog/changes/trigger/19-12-2023--16-create-fill-start-price-trigger.xml"/>
+    <include file="/db/changelog/changes/procedure/19-12-2023--17-create-create-user-procedure.xml"/>
+    <include file="/db/changelog/changes/procedure/19-12-2023--18-create-create-lot-procedure.xml"/>
+    <include file="/db/changelog/changes/procedure/19-12-2023--19-create-create-item-procedure.xml"/>
+    <include file="/db/changelog/changes/function/19-12-2023--20-create-get-max-cost-per-day-in-month-function.xml"/>
+    <include file="/db/changelog/changes/function/19-12-2023--21-create-get-by-category-function.xml"/>
+    <include file="/db/changelog/changes/function/19-12-2023--22-create-get-active-by-item-name-function.xml"/>
+    <include file="/db/changelog/changes/function/19-12-2023--23-create-calculate-selfprice-function.xml"/>
 </databaseChangeLog>

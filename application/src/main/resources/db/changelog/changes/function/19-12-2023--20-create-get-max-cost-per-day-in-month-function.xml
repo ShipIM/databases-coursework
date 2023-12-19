@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--20-create-get-max-cost-per-day-in-month-function" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION get_max_cost_buy_per_day_in_month(_start TIMESTAMP, _finish TIMESTAMP, _name TEXT)
+            RETURNS table(day DATE, max_cost_buy BIGINT, quantity BIGINT)
+            AS $$
+            BEGIN
+                RETURN query SELECT date_trunc('day', time_finish)::DATE, MAX(cost_buy) AS max_cost_buy_per_day, COUNT(1)
+                    FROM lot
+                    JOIN lot_status_information ON lot.id = lot_status_information.lot_id
+                    AND lot_status_information.status = 'SOLD'
+                    JOIN lot_time_information ON lot.id = lot_time_information.lot_id
+                    AND (time_finish BETWEEN _start AND _finish)
+                    JOIN lot_cost_information ON lot.id = lot_cost_information.lot_id
+                    JOIN item ON lot.item_id = item.id AND item.name = _name
+                    GROUP BY 1;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

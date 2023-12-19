@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="19-12-2023--21-create-get-by-category-function" author="ShipIM">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION get_by_category(IN _category TEXT)
+            RETURNS table(item_id INTEGER)
+            AS $$
+            BEGIN
+                RETURN QUERY SELECT item.id FROM item JOIN item_category ON item.id = item_category.item_id WHERE item_category.category = _category;
+            END;
+            $$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>
