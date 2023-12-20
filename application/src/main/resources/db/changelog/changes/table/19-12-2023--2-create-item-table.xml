@@ -11,7 +11,7 @@
             <column name="name" type="TEXT">
                 <constraints nullable="false"/>
             </column>
-            <column name="properties" type="JSONB">
+            <column name="properties" type="TEXT">
                 <constraints nullable="false"/>
             </column>
         </createTable>

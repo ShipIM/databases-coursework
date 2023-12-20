@@ -16,11 +16,8 @@ import java.util.List;
 public class User implements UserDetails {
 
     private String email;
-
     private String password;
-
     private Date birthDate;
-
     private Date registrationDate;
 
     @Override
