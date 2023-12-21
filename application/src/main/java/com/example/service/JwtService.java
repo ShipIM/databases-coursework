@@ -25,7 +25,7 @@ public class JwtService {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(user.getEmail())
+                .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .signWith(jwtUtils.getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();

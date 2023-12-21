@@ -1,5 +1,6 @@
 package com.example.dto.item;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,6 @@ public class ItemResponseDto {
     private String name;
     private String properties;
 
+    @JsonProperty("is_favourite")
+    private boolean isFavourite;
 }

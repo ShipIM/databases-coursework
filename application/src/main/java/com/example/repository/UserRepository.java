@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RepositoryDefinition(domainClass = User.class, idClass = String.class)
 public interface UserRepository {
-    @Query("select _user.login, p.password, _user.birth_date, _user.registration_date from _user " +
+    @Query("select _user.login as email, p.password as password from _user " +
             "join password p on _user.login = p.user_login " +
             "where login = :email")
     Optional<User> findByEmail(@Param("email") String email);

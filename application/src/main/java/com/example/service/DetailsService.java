@@ -22,7 +22,6 @@ public class DetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
-
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователя с таким email не существует."));
     }
