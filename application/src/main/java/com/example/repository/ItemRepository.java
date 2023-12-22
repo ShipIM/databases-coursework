@@ -68,4 +68,7 @@ public interface ItemRepository {
     @Query("delete from favourite where user_login = :user and item_id = :item")
     void deleteFavouriteItem(@Param("user") String user,
                              @Param("item") long item);
+
+    @Query("select exists(select * from item where id = :item)")
+    boolean isItemExists(@Param("item") long item);
 }

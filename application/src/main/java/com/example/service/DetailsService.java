@@ -25,4 +25,8 @@ public class DetailsService implements UserDetailsService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователя с таким email не существует."));
     }
+
+    public boolean isUserExists(String login) {
+        return userRepository.isUserExists(login);
+    }
 }

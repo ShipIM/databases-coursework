@@ -22,4 +22,7 @@ public interface UserRepository {
                     @Param("birth_date") Date birthDate,
                     @Param("registration_date") Date registrationDate,
                     @Param("password") String password);
+
+    @Query("select exists(select * from _user where login = :login)")
+    boolean isUserExists(@Param("login") String login);
 }
