@@ -1,11 +1,14 @@
 package com.example.repository;
 
 import com.example.model.entity.Item;
+import com.example.model.entity.ItemsForPeriod;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,4 +74,8 @@ public interface ItemRepository {
 
     @Query("select exists(select * from item where id = :item)")
     boolean isItemExists(@Param("item") long item);
+
+    @Query("select cost::integer from calculate_selfprice(:id::integer) as cost")
+    Optional<Long> getSelfprice(@Param("id") long id);
+
 }

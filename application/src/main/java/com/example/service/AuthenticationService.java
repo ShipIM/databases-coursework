@@ -18,7 +18,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    @Transactional
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

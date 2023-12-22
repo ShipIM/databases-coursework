@@ -26,4 +26,6 @@
     <include file="/db/changelog/changes/function/19-12-2023--21-create-get-by-category-function.xml"/>
     <include file="/db/changelog/changes/function/19-12-2023--22-create-get-active-by-item-name-function.xml"/>
     <include file="/db/changelog/changes/function/19-12-2023--23-create-calculate-selfprice-function.xml"/>
+    <include file="/db/changelog/changes/function/23-12-2023--1-create-dependency-parser-function.xml"/>
+
 </databaseChangeLog>

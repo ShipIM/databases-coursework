@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="23-12-2023--1-create-dependency-parser-function" author="ExcaliBBur">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION dependency_parser(_id integer)
+            RETURNS table(name TEXT, id integer, level integer)
+            AS $$
+            BEGIN
+                RETURN query WITH RECURSIVE r AS (
+				   SELECT item.name, item_second_id, 1 AS level
+				   FROM dependency
+				   		JOIN item ON dependency.item_second_id = item.id
+				   WHERE dependency.item_first_id = _id
+
+				   UNION ALL
+
+				   SELECT item.name, dependency.item_second_id, r.level + 1 AS level
+				   FROM dependency
+						JOIN r ON dependency.item_first_id = r.item_second_id
+						JOIN item ON dependency.item_second_id = item.id
+				)
+                SELECT * FROM r;
+            END;
+  			$$ LANGUAGE plpgsql;
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>

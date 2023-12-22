@@ -1,11 +1,13 @@
 package com.example.controller;
 
 import com.example.dto.item.AddFavouriteRequestDto;
+import com.example.dto.item.ItemsForPeriodRequestDto;
 import com.example.dto.item.ItemResponseDto;
 import com.example.dto.item.ItemViewResponseDto;
 import com.example.dto.page.PageRequestDto;
 import com.example.mapper.ItemMapper;
 import com.example.model.entity.Item;
+import com.example.model.entity.ItemsForPeriod;
 import com.example.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +21,8 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Tag(name = "items", description = "Контроллер для управления предметами")
@@ -93,5 +97,21 @@ public class ItemController {
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         itemService.deleteFavouriteItem(user.getUsername(), Long.parseLong(id));
+    }
+
+    @GetMapping("/selfprice/{id}")
+    @Operation(description = "Получить себестоимость предмета исходя из его компонентов")
+    public long getSelfprice(
+            @PathVariable
+            @Pattern(regexp = "^(?!0+$)\\d{1,19}$",
+                    message = "Идентификатор предмета должен быть положительным числом типа long")
+            String id) {
+        return itemService.getSelfprice(Long.parseLong(id));
+    }
+
+    @PostMapping("/items_for_period")
+    @Operation(description = "Получить максимальную цену товара за день на заданном промежутке")
+    public List<ItemsForPeriod> getItemsForPeriod(@RequestBody @Valid ItemsForPeriodRequestDto dto) {
+        return itemService.getItemsForPeriod(dto.getStart(), dto.getEnd(), Long.parseLong(dto.getItemId()));
     }
 }
