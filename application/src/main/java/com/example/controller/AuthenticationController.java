@@ -6,6 +6,7 @@ import com.example.mapper.UserMapper;
 import com.example.model.entity.User;
 import com.example.service.AuthenticationService;
 import com.example.service.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class AuthenticationController {
     private final UserMapper userMapper;
 
     @PostMapping("/registration")
+    @Operation(description = "Зарегистрировать нового пользователя")
     public String register(@RequestBody @Valid RegistrationRequestDto request) {
         User user = userMapper.mapToUser(request);
 
@@ -31,6 +33,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authentication")
+    @Operation(description = "Авторизовать уже существующего пользователя")
     public String authenticate(@RequestBody @Valid AuthenticationRequestDto request) {
         User user = userMapper.mapToUser(request);
 

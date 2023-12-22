@@ -7,6 +7,7 @@ import com.example.dto.page.PageRequestDto;
 import com.example.mapper.ItemMapper;
 import com.example.model.entity.Item;
 import com.example.service.ItemService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -30,6 +31,7 @@ public class ItemController {
     private final ItemMapper itemMapper;
 
     @GetMapping
+    @Operation(description = "Получить все существующие предметы с возможной фильтрацией по категории и названию")
     public Page<ItemViewResponseDto> getItems(
             String category,
             String name,
@@ -41,6 +43,7 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "Получить предмет по идентификатору")
     public ItemResponseDto getItem(
             @PathVariable
             @Pattern(regexp = "^(?!0+$)\\d{1,19}$",
@@ -61,6 +64,7 @@ public class ItemController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/favourites")
+    @Operation(description = "Получить список избранных предметов пользователя")
     public Page<ItemViewResponseDto> getFavouriteItems(
             String name,
             String category,
@@ -75,6 +79,7 @@ public class ItemController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/favourites")
     @ResponseStatus(value = HttpStatus.CREATED)
+    @Operation(description = "Добавить предмет в избранные")
     public void addFavouriteItem(@RequestBody @Valid AddFavouriteRequestDto dto) {
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -83,6 +88,7 @@ public class ItemController {
 
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/favourites/{id}")
+    @Operation(description = "Удалить предмет из избранных")
     public void deleteFavouriteItem(@PathVariable("id") String id) {
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
