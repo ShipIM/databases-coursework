@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final DetailsService detailsService;
 
     public Page<Item> getItems(String name, String category, Pageable pageable) {
         long total = itemRepository.countFilteredItems(name, category);
@@ -47,5 +49,19 @@ public class ItemService {
 
     public boolean isFavourite(String email, long id) {
         return itemRepository.isFavourite(email, id);
+    }
+
+    public void addFavouriteItem(String username, long id) {
+        UserDetails user = detailsService.loadUserByUsername(username);
+        Item item = this.getItem(id);
+
+        itemRepository.addFavouriteItem(username, id);
+    }
+
+    public void deleteFavouriteItem(String username, long id) {
+        UserDetails user = detailsService.loadUserByUsername(username);
+        Item item = this.getItem(id);
+
+        itemRepository.deleteFavouriteItem(username, id);
     }
 }

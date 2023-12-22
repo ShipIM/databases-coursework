@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.item.AddFavouriteRequestDto;
 import com.example.dto.item.ItemResponseDto;
 import com.example.dto.item.ItemViewResponseDto;
 import com.example.dto.page.PageRequestDto;
@@ -11,14 +12,12 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "items", description = "Контроллер для управления предметами")
@@ -73,4 +72,20 @@ public class ItemController {
         return items.map(itemMapper::mapToViewDto);
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/favourites")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void addFavouriteItem(@RequestBody @Valid AddFavouriteRequestDto dto) {
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        itemService.addFavouriteItem(user.getUsername(), Long.parseLong(dto.getItemId()));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/favourites/{id}")
+    public void deleteFavouriteItem(@PathVariable("id") String id) {
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        itemService.deleteFavouriteItem(user.getUsername(), Long.parseLong(id));
+    }
 }

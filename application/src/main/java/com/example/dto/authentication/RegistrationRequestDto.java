@@ -14,12 +14,14 @@ import java.util.Date;
 public class RegistrationRequestDto {
 
     @Email(message = "Невалидная почта")
+    @NotBlank(message = "Почта не должна быть пустой")
     private String email;
 
     @Size(min = 8, max = 16, message = "Неправильный размер пароля")
     @NotBlank(message = "Пароль не должен быть пустым")
     private String password;
 
+    @NotBlank(message = "Дата рождения не должна быть пустой")
     @JsonProperty("birth_date")
     private Date birthDate;
 

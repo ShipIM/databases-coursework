@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import com.example.model.entity.Item;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.data.repository.query.Param;
@@ -57,4 +58,14 @@ public interface ItemRepository {
     @Query("select exists(select * from favourite where user_login = :user and item_id = :item)")
     boolean isFavourite(@Param("user") String user,
                         @Param("item") long item);
+
+    @Modifying
+    @Query("insert into favourite(user_login, item_id) values (:user, :item)")
+    void addFavouriteItem(@Param("user") String user,
+                          @Param("item") long item);
+
+    @Modifying
+    @Query("delete from favourite where user_login = :user and item_id = :item")
+    void deleteFavouriteItem(@Param("user") String user,
+                             @Param("item") long item);
 }
