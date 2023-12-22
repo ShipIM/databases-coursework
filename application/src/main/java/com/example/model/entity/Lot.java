@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Lot {
 
-    private long lotId;
-    private String userLogin;
-    private long costCurrent;
-    private long costBuy;
-    private LocalDateTime timeEnd;
+    private long id;
+    private String login;
+    private long current;
+    private long buy;
+    private LocalDateTime end;
 
 }

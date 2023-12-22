@@ -21,7 +21,6 @@ public class RegistrationRequestDto {
     @NotBlank(message = "Пароль не должен быть пустым")
     private String password;
 
-    @NotBlank(message = "Дата рождения не должна быть пустой")
     @JsonProperty("birth_date")
     private Date birthDate;
 

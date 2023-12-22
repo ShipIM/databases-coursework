@@ -10,7 +10,7 @@ import java.util.List;
 @RepositoryDefinition(domainClass = Lot.class, idClass = Long.class)
 public interface LotRepository {
 
-    @Query("select lot.id as lotId, lot.user_login as userLogin, cost_current as costCurrent, cost_buy as costBuy, time_end as timeEnd from lot " +
+    @Query("select lot.id, lot.user_login as login, cost_current as current, cost_buy as buy, time_end as \"end\" from lot " +
             "join lot_cost_information lci on lot.id = lci.lot_id " +
             "join lot_status_information lsi on lot.id = lsi.lot_id " +
             "join lot_time_information lti on lot.id = lti.lot_id " +
