@@ -11,8 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Dependency {
 
+    private String name;
     private Long id;
-    private Long itemFirstId;
-    private Long itemSecondId;
+    private Long level;
 
 }

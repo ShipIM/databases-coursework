@@ -1,9 +1,9 @@
 package com.example.controller;
 
 import com.example.dto.item.AddFavouriteRequestDto;
-import com.example.dto.item.ItemsForPeriodRequestDto;
 import com.example.dto.item.ItemResponseDto;
 import com.example.dto.item.ItemViewResponseDto;
+import com.example.dto.itemsForPeriod.ItemsForPeriodRequestDto;
 import com.example.dto.page.PageRequestDto;
 import com.example.mapper.ItemMapper;
 import com.example.model.entity.Item;
@@ -109,7 +109,7 @@ public class ItemController {
         return itemService.getSelfprice(Long.parseLong(id));
     }
 
-    @PostMapping("/items_for_period")
+    @PostMapping("/items-for-period")
     @Operation(description = "Получить максимальную цену товара за день на заданном промежутке")
     public List<ItemsForPeriod> getItemsForPeriod(@RequestBody @Valid ItemsForPeriodRequestDto dto) {
         return itemService.getItemsForPeriod(dto.getStart(), dto.getEnd(), Long.parseLong(dto.getItemId()));

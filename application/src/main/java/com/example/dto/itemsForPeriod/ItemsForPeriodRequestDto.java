@@ -1,4 +1,4 @@
-package com.example.dto.item;
+package com.example.dto.itemsForPeriod;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Setter
 @Getter

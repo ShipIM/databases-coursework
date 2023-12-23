@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -108,7 +107,12 @@ public class ItemService {
             throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
         }
 
-        return itemsForPeriodRepository.getItemsForPeriod(start, end, id).orElseThrow(() ->
-                new NoSuchElementException("Нет продаж данного предмета за заданный промежуток времени"));
+        List<ItemsForPeriod> itemsForPeriods = itemsForPeriodRepository.getItemsForPeriod(start, end, id);
+
+        if (itemsForPeriods.isEmpty()) {
+            throw new NoSuchElementException("Нет продаж данного предмета за заданный промежуток времени");
+        }
+
+        return itemsForPeriods;
     }
 }
