@@ -1,21 +1,18 @@
 package com.example.repository;
 
 import com.example.model.entity.Item;
-import com.example.model.entity.ItemsForPeriod;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @RepositoryDefinition(domainClass = Item.class, idClass = Integer.class)
 public interface ItemRepository {
 
-    @Query("select id, item.name from item " +
+    @Query("select id, item.name, item.properties from item " +
             "left join item_category ic on item.id = ic.item_id " +
             "where (:name is NULL OR lower(item.name) LIKE '%' || lower(:name) || '%') " +
             "and (:category is NULL OR ic.category = :category) " +
@@ -35,7 +32,7 @@ public interface ItemRepository {
     @Query("select * from item where id = :id")
     Optional<Item> findItem(@Param("id") long id);
 
-    @Query("select item.id, item.name from item " +
+    @Query("select item.id, item.name, item.properties from item " +
             "join favourite f on item.id = f.item_id " +
             "left join item_category ic on item.id = ic.item_id " +
             "where user_login = :user " +

@@ -9,5 +9,6 @@ public class ItemViewResponseDto {
 
     private Integer id;
     private String name;
+    private String properties;
 
 }
