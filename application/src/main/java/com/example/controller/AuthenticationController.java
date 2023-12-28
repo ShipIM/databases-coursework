@@ -39,8 +39,6 @@ public class AuthenticationController {
 
         user = service.authenticate(user);
 
-        System.out.println(user.getEmail());
-
         return jwtService.generateToken(user);
     }
 }
