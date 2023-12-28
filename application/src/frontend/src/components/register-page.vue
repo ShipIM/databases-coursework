@@ -50,7 +50,8 @@ export default {
         this.errors = ["The password is incorrect"];
       } else if (response.status === 400) {
         response.text().then((text) => {
-          this.errors = JSON.parse(text).errors;
+          const errors = JSON.parse(text).errors;
+          this.errors = Array.isArray(errors) ? errors : [errors];
         })
       }
     }
