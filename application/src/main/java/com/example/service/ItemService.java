@@ -37,12 +37,12 @@ public class ItemService {
 
     public Item getItem(long id) {
         return itemRepository.findItem(id)
-                .orElseThrow(() -> new EntityNotFoundException("Предмета с таким идентификатором не существует"));
+                .orElseThrow(() -> new EntityNotFoundException("There is no item with such an identifier"));
     }
 
     public Page<Item> getFavouriteItems(String email, String name, String category, Pageable pageable) {
         if (!detailsService.isUserExists(email)) {
-            throw new EntityNotFoundException("Пользователя с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no user with this ID");
         }
 
         long total = itemRepository.countFavouriteItems(email, name, category);
@@ -58,10 +58,10 @@ public class ItemService {
 
     public boolean isFavourite(String email, long id) {
         if (!detailsService.isUserExists(email)) {
-            throw new EntityNotFoundException("Пользователя с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no user with this ID");
         }
         if (!this.isItemExists(id)) {
-            throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no item with such an identifier");
         }
 
         return itemRepository.isFavourite(email, id);
@@ -69,10 +69,10 @@ public class ItemService {
 
     public void addFavouriteItem(String username, long id) {
         if (!detailsService.isUserExists(username)) {
-            throw new EntityNotFoundException("Пользователя с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no user with this ID");
         }
         if (!this.isItemExists(id)) {
-            throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no item with such an identifier");
         }
 
         itemRepository.addFavouriteItem(username, id);
@@ -80,10 +80,10 @@ public class ItemService {
 
     public void deleteFavouriteItem(String username, long id) {
         if (!detailsService.isUserExists(username)) {
-            throw new EntityNotFoundException("Пользователя с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no user with this ID");
         }
         if (!this.isItemExists(id)) {
-            throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no item with such an identifier");
         }
 
         itemRepository.deleteFavouriteItem(username, id);
@@ -96,21 +96,21 @@ public class ItemService {
 
     public long getSelfprice(long id) {
         if (!isItemExists(id)) {
-            throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no item with such an identifier");
         }
         return itemRepository.getSelfprice(id).orElseThrow(() ->
-                new CalculateSelfpriceException("Невозможно подсчитать себестоимость"));
+                new CalculateSelfpriceException("It is impossible to calculate the selfprice"));
     }
 
     public List<ItemsForPeriod> getItemsForPeriod(LocalDate start, LocalDate end, long id) {
         if (!isItemExists(id)) {
-            throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no item with such an identifier");
         }
 
         List<ItemsForPeriod> itemsForPeriods = itemsForPeriodRepository.getItemsForPeriod(start, end, id);
 
         if (itemsForPeriods.isEmpty()) {
-            throw new NoSuchElementException("Нет продаж данного предмета за заданный промежуток времени");
+            throw new NoSuchElementException("There are no sales of this item for a given period of time");
         }
 
         return itemsForPeriods;

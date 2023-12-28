@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Tag(name = "auth", description = "Контроллер для регистрации и авторизации")
+@Tag(name = "auth", description = "The controller for registration and authorization")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
@@ -24,7 +24,7 @@ public class AuthenticationController {
     private final UserMapper userMapper;
 
     @PostMapping("/registration")
-    @Operation(description = "Зарегистрировать нового пользователя")
+    @Operation(description = "Register a new user")
     public void register(@RequestBody @Valid RegistrationRequestDto request) {
         User user = userMapper.mapToUser(request);
 
@@ -32,7 +32,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authentication")
-    @Operation(description = "Авторизовать уже существующего пользователя")
+    @Operation(description = "Authorize an existing user")
     public AuthenticationResponseDto authenticate(@RequestBody @Valid AuthenticationRequestDto request) {
         User user = userMapper.mapToUser(request);
 

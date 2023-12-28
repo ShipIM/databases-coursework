@@ -13,12 +13,12 @@ import java.util.Date;
 @Setter
 public class RegistrationRequestDto {
 
-    @Email(message = "Невалидная почта")
-    @NotBlank(message = "Почта не должна быть пустой")
+    @Email(message = "Invalid email")
+    @NotBlank(message = "The email should not be empty")
     private String email;
 
-    @Size(min = 8, max = 16, message = "Неправильный размер пароля")
-    @NotBlank(message = "Пароль не должен быть пустым")
+    @Size(min = 8, max = 16, message = "Incorrect password size")
+    @NotBlank(message = "The password must not be empty")
     private String password;
 
     @JsonProperty("birth_date")

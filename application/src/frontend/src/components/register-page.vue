@@ -1,19 +1,21 @@
 <template>
   <table id="frame">
     <tr>
-      <th id="header"><b>ФИО: Шипунов Илья Михайлович. Группа: P32111 Вариант: 11106</b></th>
+      <th id="header"><b>Registration</b></th>
     </tr>
     <tr>
       <td>
-        <register-form :destination="'http://localhost:8080/auth/registration'" :action="'Зарегистрироваться'" :limit="40" @fetch="parse"/>
+        <register-form :destination="'http://localhost:8080/auth/registration'" :limit="40" @fetch="parse"/>
         <p>
-          <router-link to="/login">Уже есть аккаунт?</router-link>
+          <router-link to="/login">Already have an account?</router-link>
         </p>
       </td>
     </tr>
-    <tr v-if="error != null">
+    <tr v-if="errors != null">
       <td>
-        <p class="error">{{ error }}</p>
+        <p v-for='error in errors' :key="error" class="error">
+          {{error}}
+        </p>
       </td>
     </tr>
   </table>
@@ -30,7 +32,7 @@ export default {
   },
   data() {
     return {
-      error: null
+      errors: null
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -43,9 +45,9 @@ export default {
       if (response.ok) {
         router.push({path: "/login"})
       } else if (response.status === 404) {
-        this.errors = ["Аккаунта с указанной почтой не существует"];
+        this.errors = ["There is no account with the specified email address"];
       } else if (response.status === 403) {
-        this.errors = ["Указан неверный пароль"];
+        this.errors = ["The password is incorrect"];
       } else if (response.status === 400) {
         response.text().then((text) => {
           this.errors = JSON.parse(text).errors;

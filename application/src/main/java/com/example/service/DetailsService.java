@@ -23,7 +23,7 @@ public class DetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("Пользователя с таким email не существует."));
+                .orElseThrow(() -> new EntityNotFoundException("There is no user with this email address"));
     }
 
     public boolean isUserExists(String login) {

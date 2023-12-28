@@ -7,16 +7,16 @@
       </colgroup>
 
       <tr>
-        <td class="label"><label for="username">Введите имя пользователя:</label></td>
+        <td class="label"><label for="username">Email:</label></td>
         <td class="input"><input type="text" id="username" :maxlength="limit" v-model="username"></td>
       </tr>
       <tr>
-        <td class="label"><label for="password">Введите пароль:</label></td>
+        <td class="label"><label for="password">Password:</label></td>
         <td class="input"><input type="password" id="password" :maxlength="limit" v-model="password"></td>
       </tr>
       <tr>
         <td class="confirm" colspan="2">
-          <button :disabled="disabled" @click="submit">Войти</button>
+          <button :disabled="disabled" @click="submit">Log in</button>
         </td>
       </tr>
     </table>

@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 public class AddFavouriteRequestDto {
 
-    @NotBlank(message = "Идентификатор предмета не должен быть пустым")
+    @NotBlank(message = "The item ID must not be empty")
     @Pattern(regexp = "^(?!0+$)\\d{1,19}$",
-            message = "Идентификатор предмета должен быть положительным числом типа long")
+            message = "The item ID must be a positive number of type long")
     @JsonProperty("item_id")
     private String itemId;
 

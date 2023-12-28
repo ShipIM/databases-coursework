@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "lots", description = "Контроллер для управления лотами")
+@Tag(name = "lots", description = "A controller for managing lots")
 @RequestMapping("/lots")
 @RequiredArgsConstructor
 public class LotController {
@@ -25,7 +25,7 @@ public class LotController {
     private final LotMapper lotMapper;
 
     @GetMapping("/{id}")
-    @Operation(description = "Получить активные лоты предмета")
+    @Operation(description = "Get active item lots")
     public Page<LotResponseDto> getActiveLots(@PathVariable("id") String id, @Valid PageRequestDto pageRequestDto) {
         Page<Lot> lots = lotService.getActiveLots(Long.parseLong(id), pageRequestDto.formPageRequest());
 

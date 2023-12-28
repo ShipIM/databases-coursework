@@ -10,11 +10,11 @@ import lombok.Setter;
 @Setter
 public class AuthenticationRequestDto {
 
-    @Email(message = "Невалидная почта")
+    @Email(message = "Invalid email")
     private String email;
 
-    @Size(min = 8, max = 16, message = "Неправильный размер пароля")
-    @NotBlank(message = "Пароль не должен быть пустым")
+    @Size(min = 8, max = 16, message = "Incorrect password size")
+    @NotBlank(message = "The password must not be empty")
     private String password;
 
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "dependencies", description = "Контроллер для получения зависимостей предмета")
+@Tag(name = "dependencies", description = "The controller for getting the dependencies of the item")
 @RequestMapping("/dependencies")
 @RequiredArgsConstructor
 public class DependencyController {
@@ -26,10 +26,10 @@ public class DependencyController {
     private final DependencyMapper dependencyMapper;
 
     @GetMapping("/{id}")
-    @Operation(description = "Получить зависимости предмета")
+    @Operation(description = "Get item dependencies")
     public Page<DependencyResponseDto> getDependencies(
             @PathVariable
-            @Pattern(regexp = "^(?!0+$)\\d{1,19}$", message = "Идентификатор предмета должен быть положительным числом типа long")
+            @Pattern(regexp = "^(?!0+$)\\d{1,19}$", message = "The item ID must be a positive number of type long")
             String id,
             @Valid PageRequestDto pageRequestDto) {
         Page<Dependency> dependencyPage = dependencyService.getDependencies(Long.parseLong(id), pageRequestDto.formPageRequest());

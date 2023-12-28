@@ -20,7 +20,7 @@ public class LotService {
 
     public Page<Lot> getActiveLots(long id, Pageable pageable) {
         if (!itemService.isItemExists(id)) {
-            throw new EntityNotFoundException("Предмета с таким идентификатором не существует");
+            throw new EntityNotFoundException("There is no item with such an identifier");
         }
 
         long total = lotRepository.countActiveLots(id);

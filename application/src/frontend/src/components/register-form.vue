@@ -7,20 +7,20 @@
       </colgroup>
 
       <tr>
-        <td class="label"><label for="username">Укажите почту:</label></td>
+        <td class="label"><label for="username">Email:</label></td>
         <td class="input"><input type="text" id="username" :maxlength="limit" v-model="username"></td>
       </tr>
       <tr>
-        <td class="label"><label for="password">Введите пароль:</label></td>
+        <td class="label"><label for="password">Password:</label></td>
         <td class="input"><input type="password" id="password" :maxlength="limit" v-model="password"></td>
       </tr>
       <tr>
-        <td class="label"><label for="birth_date">Укажите дату рождения:</label></td>
+        <td class="label"><label for="birth_date">Birth date:</label></td>
         <td class="input"><input type="text" id="birth_date" :maxlength="limit" v-model="birthDate"></td>
       </tr>
       <tr>
         <td class="confirm" colspan="2">
-          <button :disabled="disabled" @click="submit">Зарегистрироваться</button>
+          <button :disabled="disabled" @click="submit">Register</button>
         </td>
       </tr>
     </table>

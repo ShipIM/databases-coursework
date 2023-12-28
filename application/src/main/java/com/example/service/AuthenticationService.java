@@ -29,6 +29,6 @@ public class AuthenticationService {
         );
 
         return userRepository.findByEmail(user.getEmail())
-                .orElseThrow(() -> new EntityNotFoundException("Пользователя с таким email не существует"));
+                .orElseThrow(() -> new EntityNotFoundException("There is no user with this email address"));
     }
 }

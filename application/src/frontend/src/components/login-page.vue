@@ -1,13 +1,13 @@
 <template>
   <table id="frame">
     <tr>
-      <th id="header"><b>ФИО: Шипунов Илья Михайлович. Группа: P32111 Вариант: 11106</b></th>
+      <th id="header"><b>Login</b></th>
     </tr>
     <tr>
       <td>
-        <login-form :destination="'http://localhost:8080/auth/authentication'" :action="'Войти'" :limit="40" @fetch="parse"/>
+        <login-form :destination="'http://localhost:8080/auth/authentication'" :limit="40" @fetch="parse"/>
         <p>
-          <router-link to="/register">Ещё нет аккаунта?</router-link>
+          <router-link to="/register">Don't have an account yet?</router-link>
         </p>
       </td>
     </tr>
@@ -50,9 +50,9 @@ export default {
         });
         await router.push({path: "/main"});
       } else if (response.status === 404) {
-        this.errors = ["Аккаунта с указанной почтой не существует"];
+        this.errors = ["There is no account with the specified email address"];
       } else if (response.status === 403) {
-        this.errors = ["Указан неверный пароль"];
+        this.errors = ["The password is incorrect"];
       } else if (response.status === 400) {
         response.text().then((text) => {
           this.errors = JSON.parse(text).errors;
