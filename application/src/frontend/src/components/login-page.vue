@@ -43,7 +43,11 @@ export default {
   methods: {
     async parse(response) {
       if (response.ok) {
-        await response.text().then((text) => addCookie("token", text));
+        await response.text().then((text) => {
+          const json = JSON.parse(text)
+          addCookie("token", json.token)
+          addCookie("email", json.email)
+        });
         await router.push({path: "/main"});
       } else if (response.status === 404) {
         this.errors = ["Аккаунта с указанной почтой не существует"];
