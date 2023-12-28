@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,12 +17,10 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public User register(User user) {
+    public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.createUser(user.getEmail(), user.getBirthDate(), user.getRegistrationDate(), user.getPassword());
-
-        return user;
     }
 
     public User authenticate(User user) {

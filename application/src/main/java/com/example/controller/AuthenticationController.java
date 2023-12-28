@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dto.authentication.AuthenticationRequestDto;
+import com.example.dto.authentication.AuthenticationResponseDto;
 import com.example.dto.authentication.RegistrationRequestDto;
 import com.example.mapper.UserMapper;
 import com.example.model.entity.User;
@@ -24,21 +25,19 @@ public class AuthenticationController {
 
     @PostMapping("/registration")
     @Operation(description = "Зарегистрировать нового пользователя")
-    public String register(@RequestBody @Valid RegistrationRequestDto request) {
+    public void register(@RequestBody @Valid RegistrationRequestDto request) {
         User user = userMapper.mapToUser(request);
 
-        user = service.register(user);
-
-        return jwtService.generateToken(user);
+        service.register(user);
     }
 
     @PostMapping("/authentication")
     @Operation(description = "Авторизовать уже существующего пользователя")
-    public String authenticate(@RequestBody @Valid AuthenticationRequestDto request) {
+    public AuthenticationResponseDto authenticate(@RequestBody @Valid AuthenticationRequestDto request) {
         User user = userMapper.mapToUser(request);
 
         user = service.authenticate(user);
 
-        return jwtService.generateToken(user);
+        return new AuthenticationResponseDto(jwtService.generateToken(user), user.getEmail());
     }
 }
