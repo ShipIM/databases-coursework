@@ -75,4 +75,6 @@ public interface ItemRepository {
     @Query("select cost::integer from calculate_selfprice(:id::integer) as cost")
     Optional<Long> getSelfprice(@Param("id") long id);
 
+    @Query("select distinct category from item_category")
+    List<String> getCategories();
 }

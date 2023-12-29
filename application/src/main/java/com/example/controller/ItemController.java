@@ -114,4 +114,10 @@ public class ItemController {
     public List<ItemsForPeriod> getItemsForPeriod(@RequestBody @Valid ItemsForPeriodRequestDto dto) {
         return itemService.getItemsForPeriod(dto.getStart(), dto.getEnd(), Long.parseLong(dto.getItemId()));
     }
+
+    @GetMapping("/categories")
+    @Operation(description = "Get the categories of items that exist in the database")
+    public List<String> getExistingCategories() {
+        return itemService.getCategories();
+    }
 }

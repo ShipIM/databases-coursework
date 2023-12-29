@@ -24,7 +24,7 @@
 <script>
 import {addCookie, getCookie} from "@/cookies";
 import {router} from "@/router";
-import loginForm from "@/components/login-form";
+import loginForm from "@/components/login/login-form";
 
 export default {
   components: {
@@ -48,7 +48,7 @@ export default {
           addCookie("token", json.token)
           addCookie("email", json.email)
         });
-        await router.push({path: "/main"});
+        await router.back();
       } else if (response.status === 404) {
         this.errors = ["There is no account with the specified email address"];
       } else if (response.status === 403) {

@@ -24,7 +24,7 @@
 <script>
 import {router} from "@/router";
 import {getCookie} from "@/cookies";
-import registerForm from "@/components/register-form";
+import registerForm from "@/components/register/register-form";
 
 export default {
   components: {
@@ -43,7 +43,7 @@ export default {
   methods: {
     parse(response) {
       if (response.ok) {
-        router.push({path: "/login"})
+        router.back();
       } else if (response.status === 404) {
         this.errors = ["There is no account with the specified email address"];
       } else if (response.status === 403) {

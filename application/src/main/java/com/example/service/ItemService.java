@@ -115,4 +115,8 @@ public class ItemService {
 
         return itemsForPeriods;
     }
+
+    public List<String> getCategories() {
+        return itemRepository.getCategories();
+    }
 }
