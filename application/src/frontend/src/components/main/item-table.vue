@@ -11,33 +11,13 @@
                           :key="item"
                           :content="item" />
     </table>
-    <table v-if="currentSort === 'name'">
+    <table v-if="currentSort !== 'null'">
       <tr>
         <th @click="sortByName">Name</th>
         <th @click="sortByQuality">Quality</th>
         <th @click="sortByLevel">Level</th>
       </tr>
-      <item-container v-for="item in itemsSortedByName"
-                      :key="item"
-                      :content="item" />
-    </table>
-    <table v-if="currentSort === 'quality'">
-      <tr>
-        <th @click="sortByName">Name</th>
-        <th @click="sortByQuality">Quality</th>
-        <th @click="sortByLevel">Level</th>
-      </tr>
-      <item-container v-for="item in itemsSortedByQuality"
-                      :key="item"
-                      :content="item" />
-    </table>
-    <table v-if="currentSort === 'level'">
-      <tr>
-        <th @click="sortByName">Name</th>
-        <th @click="sortByQuality">Quality</th>
-        <th @click="sortByLevel">Level</th>
-      </tr>
-      <item-container v-for="item in itemsSortedByLevel"
+      <item-container v-for="item in sortedItems"
                       :key="item"
                       :content="item" />
     </table>
@@ -53,7 +33,8 @@ export default {
   },
   data() {
     return {
-      currentSort: null
+      currentSort: null,
+      sortedItems: this.items
     }
   },
   methods: {
@@ -63,6 +44,12 @@ export default {
         return;
       }
 
+      this.sortedItems = structuredClone(this.items).sort((a, b) => {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+      });
+
       this.currentSort = 'name';
     },
     sortByQuality() {
@@ -70,6 +57,15 @@ export default {
         this.currentSort = null;
         return;
       }
+
+      this.sortedItems = structuredClone(this.items).sort((a, b) => {
+        a = JSON.parse(a.properties).quality;
+        b = JSON.parse(b.properties).quality;
+
+        if (a > b) return 1;
+        if (a < b) return -1;
+        return 0;
+      });
 
       this.currentSort = 'quality';
     },
@@ -79,29 +75,7 @@ export default {
         return;
       }
 
-      this.currentSort = 'level';
-    }
-  },
-  computed: {
-    itemsSortedByName() {
-      return structuredClone(this.items).sort((a, b) => {
-        if (a.name > b.name) return 1;
-        if (a.name < b.name) return -1;
-        return 0;
-      });
-    },
-    itemsSortedByQuality() {
-      return structuredClone(this.items).sort((a, b) => {
-        a = JSON.parse(a.properties).quality;
-        b = JSON.parse(b.properties).quality;
-
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-      });
-    },
-    itemsSortedByLevel() {
-      return structuredClone(this.items).sort((a, b) => {
+      this.sortedItems = structuredClone(this.items).sort((a, b) => {
         a = JSON.parse(a.properties).itemLevel;
         b = JSON.parse(b.properties).itemLevel;
 
@@ -109,6 +83,8 @@ export default {
         if (a < b) return -1;
         return 0;
       });
+
+      this.currentSort = 'level';
     }
   }
 }
