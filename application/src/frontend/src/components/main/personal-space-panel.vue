@@ -1,7 +1,7 @@
 <template>
   <div v-if="typeof(username) !== 'undefined'">
     <span @click="handleUsernameClick">{{username}}</span>
-    <button @click="handleLogOutClick">Log out</button>
+    <button v-if="$route.name === 'personal'" @click="handleLogOutClick">Log out</button>
   </div>
   <div v-if="typeof(username) === 'undefined'">
     <button @click="handleLogInClick">Log in</button>
@@ -21,13 +21,15 @@ export default {
   },
   methods: {
     handleUsernameClick() {
-      //TODO после того, как доработаю страницу ЛК, надо добавить сюда переход
+      router.push('/personal');
     },
     handleLogOutClick() {
       eraseCookie('token');
       eraseCookie('email');
 
       this.username = null;
+
+      router.push('/login');
     },
     handleLogInClick() {
       router.push('/login');

@@ -1,7 +1,7 @@
 <template>
   <table id="frame">
     <tr>
-      <th colspan="2" id="header"><b>Main page</b></th>
+      <th @click="handleNavigate" colspan="2" id="header"><b>Personal space</b></th>
     </tr>
     <tr>
       <td>
@@ -46,6 +46,8 @@ import categoryContainer from "@/components/main/category-container";
 import personalSpacePanel from "@/components/main/personal-space-panel";
 import itemTable from "@/components/main/item-table";
 import {computed} from "vue";
+import {getCookie} from "@/cookies";
+import {router} from "@/router";
 
 export default {
   components: {
@@ -76,7 +78,7 @@ export default {
     },
     handleSearch() {
       this.currentPage = 0;
-      let url = new URL('http://localhost:8080/items');
+      let url = new URL('http://localhost:8080/items/favourites');
       let params = [];
       if (this.itemCategory !== null) {
         params.push(['category', this.itemCategory])
@@ -89,7 +91,8 @@ export default {
       fetch(url, {
         method: 'GET',
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + (getCookie("token") != null ? getCookie("token") : "")
         },
       })
           .then((response) => response.json())
@@ -105,7 +108,7 @@ export default {
     handleNext() {
       this.currentPage++;
 
-      let url = new URL('http://localhost:8080/items');
+      let url = new URL('http://localhost:8080/items/favourites');
       let params = [['pageNumber', this.currentPage]]
       if (this.itemCategory !== null) {
         params.push(['category', this.itemCategory])
@@ -118,7 +121,8 @@ export default {
       fetch(url, {
         method: 'GET',
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + (getCookie("token") != null ? getCookie("token") : "")
         },
       })
           .then((response) => response.json())
@@ -129,7 +133,7 @@ export default {
         this.currentPage--;
       }
 
-      let url = new URL('http://localhost:8080/items');
+      let url = new URL('http://localhost:8080/items/favourites');
       let params = [['pageNumber', this.currentPage]]
       if (this.itemCategory !== null) {
         params.push(['category', this.itemCategory])
@@ -142,27 +146,33 @@ export default {
       fetch(url, {
         method: 'GET',
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + (getCookie("token") != null ? getCookie("token") : "")
         },
       })
           .then((response) => response.json())
           .then((data) => this.items = data.content);
+    },
+    handleNavigate() {
+      router.push('/main');
     }
   },
   mounted() {
-    fetch('http://localhost:8080/items/categories', {
+    fetch('http://localhost:8080/items/favourites/categories', {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + (getCookie("token") != null ? getCookie("token") : "")
       },
     })
         .then((response) => response.json())
         .then((data) => this.categories = data);
 
-    fetch('http://localhost:8080/items', {
+    fetch('http://localhost:8080/items/favourites', {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + (getCookie("token") != null ? getCookie("token") : "")
       },
     })
         .then((response) => response.json())

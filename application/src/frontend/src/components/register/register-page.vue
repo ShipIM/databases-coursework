@@ -1,7 +1,7 @@
 <template>
   <table id="frame">
     <tr>
-      <th id="header"><b>Registration</b></th>
+      <th @click="handleNavigate" id="header"><b>Registration</b></th>
     </tr>
     <tr>
       <td>
@@ -54,6 +54,9 @@ export default {
           this.errors = Array.isArray(errors) ? errors : [errors];
         })
       }
+    },
+    handleNavigate() {
+      router.push('/main');
     }
   }
 }

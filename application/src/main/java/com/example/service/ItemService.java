@@ -119,4 +119,8 @@ public class ItemService {
     public List<String> getCategories() {
         return itemRepository.getCategories();
     }
+
+    public List<String> getFavouritesCategories(String username) {
+        return itemRepository.getFavouritesCategories(username);
+    }
 }

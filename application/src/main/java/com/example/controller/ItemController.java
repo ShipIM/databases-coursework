@@ -120,4 +120,13 @@ public class ItemController {
     public List<String> getExistingCategories() {
         return itemService.getCategories();
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/favourites/categories")
+    @Operation(description = "Get the categories of favourite items that exist in the database")
+    public List<String> getExistingFavouritesCategories() {
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return itemService.getFavouritesCategories(user.getUsername());
+    }
 }
