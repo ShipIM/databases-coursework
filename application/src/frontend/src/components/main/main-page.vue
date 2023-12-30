@@ -24,7 +24,6 @@
             <category-container v-for="category in categories"
                                 :key="category"
                                 :content="category"
-                                :ref="category"
                                 @emit-category="handleChoice" />
           </table>
         </div>
@@ -32,6 +31,14 @@
     </tr>
     <tr>
       <item-table />
+    </tr>
+    <tr>
+      <td>
+        <button @click="handleSearch">Search</button>
+        <button @click="handleReset">Reset</button>
+        <button :disabled="currentPage >= maximumPage - 1" @click="handleNext">Next</button>
+        <button :disabled="currentPage === 0" @click="handlePrevious">Previous</button>
+      </td>
     </tr>
   </table>
 </template>
@@ -52,6 +59,8 @@ export default {
     return {
       itemName: null,
       itemCategory: null,
+      currentPage: 0,
+      maximumPage: null,
 
       categories: null,
       items: null
@@ -66,6 +75,80 @@ export default {
   methods: {
     handleChoice(category) {
       this.itemCategory = category;
+    },
+    handleSearch() {
+      this.currentPage = 0;
+      let url = new URL('http://localhost:8080/items');
+      let params = [];
+      if (this.itemCategory !== null) {
+        params.push(['category', this.itemCategory])
+      }
+      if (this.itemName !== null) {
+        params.push(['name', this.itemName])
+      }
+      url.search = new URLSearchParams(params).toString();
+
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        },
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            this.items = data.content;
+            this.maximumPage = data.totalPages;
+          });
+    },
+    handleReset() {
+      this.itemName = null;
+      this.itemCategory = null;
+    },
+    handleNext() {
+      this.currentPage++;
+
+      let url = new URL('http://localhost:8080/items');
+      let params = [['pageNumber', this.currentPage]]
+      if (this.itemCategory !== null) {
+        params.push(['category', this.itemCategory])
+      }
+      if (this.itemName !== null) {
+        params.push(['name', this.itemName])
+      }
+      url.search = new URLSearchParams(params).toString();
+
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        },
+      })
+          .then((response) => response.json())
+          .then((data) => this.items = data.content);
+    },
+    handlePrevious() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+      }
+
+      let url = new URL('http://localhost:8080/items');
+      let params = [['pageNumber', this.currentPage]]
+      if (this.itemCategory !== null) {
+        params.push(['category', this.itemCategory])
+      }
+      if (this.itemName !== null) {
+        params.push(['name', this.itemName])
+      }
+      url.search = new URLSearchParams(params).toString();
+
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        },
+      })
+          .then((response) => response.json())
+          .then((data) => this.items = data.content);
     }
   },
   mounted() {
@@ -85,7 +168,10 @@ export default {
       },
     })
         .then((response) => response.json())
-        .then((data) => this.items = data.content);
+        .then((data) => {
+          this.items = data.content;
+          this.maximumPage = data.totalPages;
+        });
   }
 }
 </script>

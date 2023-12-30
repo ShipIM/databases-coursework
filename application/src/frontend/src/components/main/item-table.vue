@@ -1,25 +1,15 @@
 <template>
   <span>Items</span>
   <div class="table-wrapper">
-    <table v-if="currentSort === null">
+    <table>
       <tr>
         <th @click="sortByName">Name</th>
         <th @click="sortByQuality">Quality</th>
         <th @click="sortByLevel">Level</th>
       </tr>
-      <item-container v-for="item in items"
+      <item-container v-for="item in itemsView"
                           :key="item"
                           :content="item" />
-    </table>
-    <table v-if="currentSort !== 'null'">
-      <tr>
-        <th @click="sortByName">Name</th>
-        <th @click="sortByQuality">Quality</th>
-        <th @click="sortByLevel">Level</th>
-      </tr>
-      <item-container v-for="item in sortedItems"
-                      :key="item"
-                      :content="item" />
     </table>
   </div>
 </template>
@@ -34,7 +24,41 @@ export default {
   data() {
     return {
       currentSort: null,
-      sortedItems: this.items
+    }
+  },
+  computed: {
+    itemsView() {
+      if (this.currentSort === 'name') {
+        return structuredClone(this.items).sort((a, b) => {
+          if (a.name > b.name) return 1;
+          if (a.name < b.name) return -1;
+          return 0;
+        });
+      }
+
+      if (this.currentSort === 'quality') {
+        return structuredClone(this.items).sort((a, b) => {
+          a = JSON.parse(a.properties).quality;
+          b = JSON.parse(b.properties).quality;
+
+          if (a > b) return 1;
+          if (a < b) return -1;
+          return 0;
+        });
+      }
+
+      if (this.currentSort === 'level') {
+        return structuredClone(this.items).sort((a, b) => {
+          a = JSON.parse(a.properties).itemLevel;
+          b = JSON.parse(b.properties).itemLevel;
+
+          if (a > b) return 1;
+          if (a < b) return -1;
+          return 0;
+        });
+      }
+
+      return this.items;
     }
   },
   methods: {
@@ -44,12 +68,6 @@ export default {
         return;
       }
 
-      this.sortedItems = structuredClone(this.items).sort((a, b) => {
-        if (a.name > b.name) return 1;
-        if (a.name < b.name) return -1;
-        return 0;
-      });
-
       this.currentSort = 'name';
     },
     sortByQuality() {
@@ -58,15 +76,6 @@ export default {
         return;
       }
 
-      this.sortedItems = structuredClone(this.items).sort((a, b) => {
-        a = JSON.parse(a.properties).quality;
-        b = JSON.parse(b.properties).quality;
-
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-      });
-
       this.currentSort = 'quality';
     },
     sortByLevel() {
@@ -74,15 +83,6 @@ export default {
         this.currentSort = null;
         return;
       }
-
-      this.sortedItems = structuredClone(this.items).sort((a, b) => {
-        a = JSON.parse(a.properties).itemLevel;
-        b = JSON.parse(b.properties).itemLevel;
-
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-      });
 
       this.currentSort = 'level';
     }
