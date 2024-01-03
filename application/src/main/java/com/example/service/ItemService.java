@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.exception.CalculateSelfpriceException;
 import com.example.exception.EntityNotFoundException;
+import com.example.exception.NoSalesForPeriodException;
 import com.example.model.entity.Item;
 import com.example.model.entity.ItemsForPeriod;
 import com.example.repository.ItemRepository;
@@ -110,7 +111,7 @@ public class ItemService {
         List<ItemsForPeriod> itemsForPeriods = itemsForPeriodRepository.getItemsForPeriod(start, end, id);
 
         if (itemsForPeriods.isEmpty()) {
-            throw new NoSuchElementException("There are no sales of this item for a given period of time");
+            throw new NoSalesForPeriodException("There are no sales of this item for a given period of time");
         }
 
         return itemsForPeriods;

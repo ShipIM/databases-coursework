@@ -44,7 +44,6 @@ public interface ItemRepository {
                                   @Param("category") String category,
                                   @Param("page_size") long pageSize,
                                   @Param("page_number") long pageNumber);
-
     @Query("select count(*) from item " +
             "join favourite f on item.id = f.item_id " +
             "left join item_category ic on item.id = ic.item_id " +

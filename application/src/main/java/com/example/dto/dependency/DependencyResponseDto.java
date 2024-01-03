@@ -8,10 +8,8 @@ import lombok.Setter;
 @Getter
 public class DependencyResponseDto {
 
-    @JsonProperty("item_name")
     private String name;
 
-    @JsonProperty("item_id")
     private Long id;
 
     private Long level;

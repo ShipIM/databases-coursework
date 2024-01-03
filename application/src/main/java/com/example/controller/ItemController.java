@@ -98,7 +98,6 @@ public class ItemController {
 
         itemService.deleteFavouriteItem(user.getUsername(), Long.parseLong(id));
     }
-
     @GetMapping("/selfprice/{id}")
     @Operation(description = "Get the cost of an item based on its components")
     public long getSelfprice(

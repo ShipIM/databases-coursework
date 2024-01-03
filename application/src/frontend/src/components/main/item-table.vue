@@ -7,9 +7,7 @@
         <th @click="sortByQuality">Quality</th>
         <th @click="sortByLevel">Level</th>
       </tr>
-      <item-container v-for="item in itemsView"
-                          :key="item"
-                          :content="item" />
+      <item-container v-for="item in itemsView" :key="item" :content="item" />
     </table>
   </div>
 </template>
@@ -91,9 +89,9 @@ export default {
 </script>
 
 <style>
-  div.table-wrapper {
-    overflow: hidden;
-    overflow-y: scroll;
-    height: 300px;
-  }
+div.table-wrapper {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 300px;
+}
 </style>

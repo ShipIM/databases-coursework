@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { router } from '@/router';
+
 export default {
   props: {
     content: JSON
@@ -21,7 +23,8 @@ export default {
   },
   methods: {
     handleClick() {
-      //TODO добавить сюда переход на страницу с лотами
+      const itemId = this.itemId
+      router.push({ name: 'lots', params: { id: itemId }})
     }
   }
 }

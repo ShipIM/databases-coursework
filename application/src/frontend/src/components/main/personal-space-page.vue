@@ -1,7 +1,7 @@
 <template>
   <table id="frame">
     <tr>
-      <th @click="handleNavigate" colspan="2" id="header"><b>Personal space</b></th>
+      <th @click="handleNavigate" colspan='2' id="header"><b>Personal space</b></th>
     </tr>
     <tr>
       <td>
