@@ -2,9 +2,9 @@
     <div class="table-wrapper">
         <table>
             <tr>
-                <th @click="sortByName">Seller</th>
-                <th >Finish time</th>
-                <th>Current bid</th>
+                <th @click="sortBySeller">Seller</th>
+                <th @click="sortByTime">Finish time</th>
+                <th @click="sortByBid">Current bid</th>
             </tr>
             <lots-container v-for="lot in lotsView" :key="lot" :content="lot" />
         </table>
@@ -26,18 +26,29 @@ export default {
     },
     computed: {
         lotsView() {
-            if (this.currentSort == 'name') {
+            if (this.currentSort == 'seller') {
                 return structuredClone(this.lots).sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    if (a.name < b.name) return -1;
+                    if (a.vendor > b.vendor) return 1;
+                    if (a.vendor < b.vendor) return -1;
                     return 0;
                 });
             }
 
-            if (this.currentSort == 'level') {
+            if (this.currentSort == 'time') {
                 return structuredClone(this.lots).sort((a, b) => {
-                    a = a.level;
-                    b = b.level;
+                    a = a.time_end;
+                    b = b.time_end;
+
+                    if (a > b) return 1;
+                    if (a < b) return -1;
+                    return 0;
+                });
+            }
+
+            if (this.currentSort == 'bid') {
+                return structuredClone(this.lots).sort((a, b) => {
+                    a = a.cost_current;
+                    b = b.cost_current;
 
                     if (a > b) return 1;
                     if (a < b) return -1;
@@ -49,21 +60,29 @@ export default {
         }
     },
     methods: {
-        sortByName() {
-            if (this.currentSort === 'name') {
+        sortBySeller() {
+            if (this.currentSort === 'seller') {
                 this.currentSort = null;
                 return;
             }
 
-            this.currentSort = 'name';
+            this.currentSort = 'seller';
         },
-        sortByNestingLevel() {
-            if (this.currentSort === 'level') {
+        sortByTime() {
+            if (this.currentSort === 'time') {
                 this.currentSort = null;
                 return;
             }
 
-            this.currentSort = 'level';
+            this.currentSort = 'time';
+        },
+        sortByBid() {
+            if (this.currentSort === 'bid') {
+                this.currentSort = null;
+                return;
+            }
+
+            this.currentSort = 'bid';
         }
     }
 }
