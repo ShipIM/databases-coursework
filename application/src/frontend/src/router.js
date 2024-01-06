@@ -10,7 +10,8 @@ const routes = [
     {path: '/register', component: registerPage, name: 'register'},
     {path: '/main', component: mainPage, name: 'main'},
     {path: '/personal', component: personalSpacePage, name: 'personal'},
-    {path: '/lots/:id', component: lotPage, name: 'lots'}
+    {path: '/lots/:id', component: lotPage, name: 'lots'},
+    {path: "/:catchAll(.*)", component: mainPage}
 ];
 
 export const router = createRouter({

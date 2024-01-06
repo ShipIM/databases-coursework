@@ -88,7 +88,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 div.table-wrapper {
   overflow: hidden;
   overflow-y: scroll;
