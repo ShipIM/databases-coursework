@@ -77,7 +77,7 @@ public interface ItemRepository {
     @Query("select distinct category from item_category")
     List<String> getCategories();
 
-    @Query("select category from item_category " +
+    @Query("select distinct category from item_category " +
             "join favourite f on item_category.item_id = f.item_id " +
             "where user_login = :user")
     List<String> getFavouritesCategories(@Param("user") String username);
