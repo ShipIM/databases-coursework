@@ -4,6 +4,15 @@ server:
 spring:
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
+    enabled: true
   web:
     resources:
       add-mappings: false
+  datasource:
+    url: jdbc:postgresql://pg:5432/studs
+    username: s335989
+    password: pNjKHNNjYyXszdjJ
+    driver-class-name: org.postgresql.Driver
+
+jwt:
+  secret: B6E5061FADAD40CCAEBDD0F4B3EB3DEE3F4FCE86695FA0076BA9E0A894A53140
