@@ -39,9 +39,9 @@
         </div>
 
         <div v-if="this.isDependencies">
-          <button :disabled="currentPageDependencies >= maximumPageDependencies - 1"
-            @click="handleNextDependencies" class="next3">Next</button>
           <button :disabled="currentPageDependencies === 0" @click="handlePreviousDependencies" class="prev3">Previous</button>
+          <button :disabled="currentPageDependencies >= maximumPageDependencies - 1"
+                  @click="handleNextDependencies" class="next3">Next</button>
         </div>
 
       </td>
@@ -55,9 +55,9 @@
         </table>
 
         <div v-if="this.isLots">
-          <button :disabled="currentPageLots >= maximumPageLots - 1"
-            @click="handleNextLots" class="next4">Next</button>
           <button :disabled="currentPageLots === 0" @click="handlePreviousLots" class="prev4">Previous</button>
+          <button :disabled="currentPageLots >= maximumPageLots - 1"
+                  @click="handleNextLots" class="next4">Next</button>
         </div>
 
       </td>

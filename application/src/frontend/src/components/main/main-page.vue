@@ -34,8 +34,8 @@
       <td colspan="2">
         <button @click="handleSearch" class="search">Search</button>
         <button @click="handleReset" class="reset">Reset</button>
-        <button :disabled="currentPage >= maximumPage - 1" @click="handleNext" class="next">Next</button>
         <button :disabled="currentPage === 0" @click="handlePrevious" class="previous">Prev</button>
+        <button :disabled="currentPage >= maximumPage - 1" @click="handleNext" class="next">Next</button>
       </td>
     </tr>
   </table>
