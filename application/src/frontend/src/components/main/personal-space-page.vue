@@ -5,7 +5,7 @@
     </tr>
     <tr>
       <td>
-        <span>Name</span>
+        <span class="name3">Name</span>
         <div>
           <input type="text" v-model="itemName">
         </div>
@@ -16,7 +16,7 @@
     </tr>
     <tr>
       <td>
-        <span>Categories</span>
+        <span class="categories2">Categories</span>
         <div class="list-wrapper">
           <table>
             <category-container v-for="category in categories"
@@ -32,10 +32,10 @@
     </tr>
     <tr>
       <td colspan="2">
-        <button @click="handleSearch">Search</button>
-        <button @click="handleReset">Reset</button>
-        <button :disabled="currentPage >= maximumPage - 1" @click="handleNext">Next</button>
-        <button :disabled="currentPage === 0" @click="handlePrevious">Previous</button>
+        <button @click="handleSearch" class="search2">Search</button>
+        <button @click="handleReset" class="reset2">Reset</button>
+        <button :disabled="currentPage >= maximumPage - 1" @click="handleNext" class="next2">Next</button>
+        <button :disabled="currentPage === 0" @click="handlePrevious" class="previous2">Previous</button>
       </td>
     </tr>
   </table>
@@ -210,7 +210,7 @@ export default {
 }
 
 #header {
-  color: black;
+  color: rgb(255, 251, 0);
   font-size: medium;
   font-family: serif;
   text-align: center;
@@ -227,12 +227,67 @@ p {
 
 tr, td, th {
   border-radius: 12px;
-  background-color: wheat;
+  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
 }
 
 div.list-wrapper {
   overflow: hidden;
   overflow-y: scroll;
-  height: 150px;
+  height: 120px;
+  background-color: rgb(34, 23, 14);
+  color: rgb(255, 251, 0);
+}
+
+#frame input {
+  margin-top: 0px;
+  border: 10;
+  border-color: rgb(171, 179, 179);
+  background-color: rgb(10, 6, 0);
+  color: aliceblue;
+  outline: none;
+  margin-left: 50px;
+  border-radius: 4px;
+}
+.name3 {
+  color: rgb(255, 255, 255);
+  text-align: left;
+  padding-left: 50px;
+}
+
+.search2 {
+  background-color: rgb(158, 0, 0);
+  color: rgb(182, 168, 45);
+  padding-right: 20px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 15px;
+}
+.reset2 {
+  background-color: rgb(158, 0, 0);
+  color: rgb(182, 168, 45);
+  padding-right: 20px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 15px;
+}
+.next2 {
+  background-color: black;
+  color: white;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+.previous2 {
+  background-color: black;
+  color: white;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+.categories2 {
+  color: white;
+  padding-left: 5px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <tr @click="handleClick">
-      <td>{{itemName}}</td>
-      <td>{{level}}</td>
+      <td class="name">{{itemName}}</td>
+      <td class="nelevel">{{level}}</td>
     </tr>
 </template>
 
@@ -27,3 +27,24 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.name {
+background-color: rgb(0, 0, 0);
+border-radius: 0px;
+width: 10%;
+border-style: solid;
+border-width: 1px;
+border-color: rgb(54, 54, 54);
+padding: 2px 5px;
+}
+.nelevel {
+background-color: rgb(0, 0, 0);
+border-radius: 0px;
+width: 10%;
+border-style: solid;
+border-width: 1px;
+border-color: rgb(54, 54, 54);
+padding: 2px 5px;
+}
+</style>

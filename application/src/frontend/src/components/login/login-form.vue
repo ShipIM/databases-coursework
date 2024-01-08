@@ -16,7 +16,7 @@
       </tr>
       <tr>
         <td class="confirm" colspan="2">
-          <button :disabled="disabled" @click="submit">Log in</button>
+          <button :disabled="disabled" @click="submit" class="login2">Log in</button>
         </td>
       </tr>
     </table>
@@ -90,17 +90,37 @@ table {
 }
 
 .input {
-  text-align: left;
-  padding: 1% 1% 1% 1%;
+  margin-top: 0px;
+  border: 10;
+  border-color: rgb(171, 179, 179);
+  color: aliceblue;
+  outline: none;
+  margin-left: 50px;
+  border-radius: 4px;
 }
 
 .label {
   text-align: right;
   padding: 1% 1% 1% 1%;
+  margin-top: 0px;
+  color: rgb(255, 255, 255);
+  outline: none;
+  margin-left: 50px;
+  border-radius: 4px;
 }
 
 .confirm {
   text-align: center;
   padding: 2% 1% 1% 1%;
+}
+.login2 {
+  background-color: blue;
+  color: rgb(182, 168, 45);
+  padding-right: 10px;
+  border-radius: 4px;
+  margin-left: 10px;
+  padding: 2px 10px;
+  border-style: inset;
+  border-color: black;
 }
 </style>
