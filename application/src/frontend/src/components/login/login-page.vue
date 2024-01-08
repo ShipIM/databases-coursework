@@ -7,7 +7,7 @@
       <td>
         <login-form :destination="'http://localhost:8080/auth/authentication'" :limit="40" @fetch="parse"/>
         <p>
-          <router-link to="/register">Don't have an account yet?</router-link>
+          <router-link to="/register" class="dont">Don't have an account yet?</router-link>
         </p>
       </td>
     </tr>
@@ -92,7 +92,7 @@ export default {
 }
 
 #header {
-  color: black;
+  color: rgb(0, 0, 0);
   font-size: medium;
   font-family: serif;
   text-align: center;
@@ -118,6 +118,9 @@ p {
 
 tr, td, th {
   border-radius: 12px;
-  background-color: wheat;
+  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
+}
+.dont {
+  color: rgb(0, 0, 0);
 }
 </style>

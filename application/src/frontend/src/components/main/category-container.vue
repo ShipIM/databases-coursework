@@ -1,6 +1,6 @@
 <template>
     <tr>
-      <td v-bind:class="getClass()" @click="handleClick">{{content}}</td>
+      <td v-bind:class="getClass()" @click="handleClick" class="category">{{content}}</td>
     </tr>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .chosen-one {
     color: red;
     font-size: medium;
@@ -31,5 +31,15 @@ export default {
     padding-right: 3%;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+  }
+  .category {
+    background-color: rgb(0, 0, 0);
+    border-radius: 3px;
+    width: 10%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(54, 54, 54);
+    padding: 2px 5px;
+
   }
 </style>

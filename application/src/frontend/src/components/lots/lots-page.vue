@@ -5,9 +5,9 @@
     </tr>
     <tr>
       <td>
-        <span>Name</span>
+        <span class="name4">Name</span>
         <div>
-          <span>{{ itemName }}</span>
+          <span class="itn">{{ itemName }}</span>
         </div>
         <div>
           <input id="isFavourite" type="checkbox" @click="handleFavourite" />
@@ -21,7 +21,7 @@
     <tr>
 
       <td>
-        <span>Dependencies</span>
+        <span class="dep">Dependencies</span>
         <div class="list-wrapper">
           <table>
             <text v-if="!this.isDependencies">There is no dependencies for this item</text>
@@ -40,8 +40,8 @@
 
         <div v-if="this.isDependencies">
           <button :disabled="currentPageDependencies >= maximumPageDependencies - 1"
-            @click="handleNextDependencies">Next</button>
-          <button :disabled="currentPageDependencies === 0" @click="handlePreviousDependencies">Previous</button>
+            @click="handleNextDependencies" class="next3">Next</button>
+          <button :disabled="currentPageDependencies === 0" @click="handlePreviousDependencies" class="prev3">Previous</button>
         </div>
 
       </td>
@@ -56,8 +56,8 @@
 
         <div v-if="this.isLots">
           <button :disabled="currentPageLots >= maximumPageLots - 1"
-            @click="handleNextLots">Next</button>
-          <button :disabled="currentPageLots === 0" @click="handlePreviousLots">Previous</button>
+            @click="handleNextLots" class="next4">Next</button>
+          <button :disabled="currentPageLots === 0" @click="handlePreviousLots" class="prev4">Previous</button>
         </div>
 
       </td>
@@ -353,7 +353,7 @@ export default {
 }
 
 #header {
-  color: black;
+  color: rgb(255, 251, 0);
   font-size: medium;
   font-family: serif;
   text-align: center;
@@ -373,11 +373,70 @@ td,
 th {
   border-radius: 12px;
   background-color: wheat;
+  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
 }
 
 div.list-wrapper {
   overflow: hidden;
   /* overflow-y: scroll; */
   /* height: 150px; */
+}
+
+#frame input {
+  color: rgb(255, 255, 255);
+}
+.dep {
+  color: rgb(0, 0, 0);
+  padding-left: 5px;
+}
+#frame text {
+  color: rgb(0, 0, 0);
+  margin-top: 5px;
+}
+.next3 {
+  background-color: black;
+  color: white;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+.prev3 {
+  background-color: black;
+  color: white;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+.next4 {
+  background-color: black;
+  color: white;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+  margin-top: 5px;
+}
+.prev4 {
+  background-color: black;
+  color: white;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+  margin-top: 5px;
+}
+.name4 {
+  color: rgb(0, 0, 0);
+  padding-left: 5px;
+}
+.itn {
+  color: rgb(0, 0, 0);
+  padding-left: 5px;
+}
+#frame label {
+  color: rgb(0, 153, 38);
+  padding-left: 5px;
 }
 </style>

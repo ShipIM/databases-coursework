@@ -72,6 +72,21 @@ export default {
 div.table-wrapper {
     overflow: hidden;
     overflow-y: scroll;
-    height: 300px;
+    height: 500px;
+    background-color: rgb(34, 23, 14);
+    color: rgb(255, 255, 255);
 }
+::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(34, 23, 14)
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0);
+  border-radius: 0px;
+  border: 1px solid rgb(54, 54, 54);
+}
+
 </style>

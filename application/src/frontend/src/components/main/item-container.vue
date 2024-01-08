@@ -1,8 +1,8 @@
 <template>
   <tr @click="handleClick">
-    <td>{{itemName}}</td>
-    <td>{{itemQuality}}</td>
-    <td>{{itemLevel}}</td>
+    <td class="namee">{{itemName}}</td>
+    <td class="qualityy">{{itemQuality}}</td>
+    <td class="levell">{{itemLevel}}</td>
   </tr>
 </template>
 
@@ -29,3 +29,31 @@ export default {
   }
 }
 </script>
+<style scoped>
+.namee {
+  background-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(54, 54, 54);
+  padding: 2px 5px;
+  width: 50%;
+  border-radius: 3px 0 0 3px;
+}
+.qualityy {
+  background-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(54, 54, 54);
+  padding: 2px 5px;
+  width: 20%;
+}
+.levell {
+  background-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(54, 54, 54);
+  padding: 2px 5px;
+  width: 20%;
+  border-radius: 0 3px 3px 0;
+}
+</style>

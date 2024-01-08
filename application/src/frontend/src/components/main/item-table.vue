@@ -1,11 +1,11 @@
 <template>
-  <span>Items</span>
+  <span class="items">Items</span>
   <div class="table-wrapper">
     <table>
       <tr>
-        <th @click="sortByName">Name</th>
-        <th @click="sortByQuality">Quality</th>
-        <th @click="sortByLevel">Level</th>
+        <th @click="sortByName" class="name">Name</th>
+        <th @click="sortByQuality" class="quality">Quality</th>
+        <th @click="sortByLevel" class="level">Level</th>
       </tr>
       <item-container v-for="item in itemsView" :key="item" :content="item" />
     </table>
@@ -93,5 +93,45 @@ div.table-wrapper {
   overflow: hidden;
   overflow-y: scroll;
   height: 300px;
+}
+::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(34, 23, 14)
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0);
+  border-radius: 0px;
+  border: 1px solid rgb(54, 54, 54);
+}
+.name {
+  color: white;
+  padding-left: 5px;
+}
+
+.quality {
+  color: white;
+  padding-left: 5px;
+  
+}
+
+.level {
+  color: white;
+  padding-right:30px;
+  padding-left: 30px;
+
+
+}
+
+.items{
+  color: white;
+  padding-left: 10px;
+ 
+}
+.table-wrapper {
+  background-color: rgb(34, 23, 14);
+  color: white;
 }
 </style>

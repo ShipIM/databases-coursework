@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <td class="confirm" colspan="2">
-          <button :disabled="disabled" @click="submit">Register</button>
+          <button :disabled="disabled" @click="submit" class="register">Register</button>
         </td>
       </tr>
     </table>
@@ -112,10 +112,27 @@ table {
 .label {
   text-align: right;
   padding: 1% 1% 1% 1%;
+  text-align: right;
+  padding: 1% 1% 1% 1%;
+  margin-top: 0px;
+  color: rgb(255, 255, 255);
+  outline: none;
+  margin-left: 50px;
+  border-radius: 4px;
 }
 
 .confirm {
   text-align: center;
   padding: 2% 1% 1% 1%;
+}
+.register{
+  background-color: blue;
+  color: rgb(182, 168, 45);
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 4px;
+  padding: 2px 10px;
+  border-style: inset;
+  border-color: black;
 }
 </style>
