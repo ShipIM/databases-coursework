@@ -217,7 +217,7 @@ p {
 
 tr, td, th {
   border-radius: 12px;
-  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
+  background-image: url('~@/assets/image.jpg');
 }
 .categories {
   color: white;
@@ -247,17 +247,14 @@ div.list-wrapper {
 
 #frame input {
   margin-top: 0px;
-  border: 10;
-  border-color: rgb(171, 179, 179);
+  border: 10 rgb(171, 179, 179);
   background-color: rgb(10, 6, 0);
   color: aliceblue;
   outline: none;
   margin-left: 50px;
   border-radius: 4px;
-  
- 
-  
 }
+
 #frame .names {
   color: rgb(255, 255, 255);
   text-align: left;
@@ -267,7 +264,6 @@ div.list-wrapper {
 #frame .reset {
   background-color: rgb(158, 0, 0);
   color: rgb(182, 168, 45);
-  padding-right: 20px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 15px;
@@ -276,7 +272,6 @@ div.list-wrapper {
 #frame .search {
   background-color: rgb(158, 0, 0);
   color: rgb(182, 168, 45);
-  padding-right: 20px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 15px;
@@ -285,7 +280,6 @@ div.list-wrapper {
 #frame .previous {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -294,7 +288,6 @@ div.list-wrapper {
 #frame .next {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;

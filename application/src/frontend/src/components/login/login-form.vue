@@ -91,8 +91,7 @@ table {
 
 .input {
   margin-top: 0px;
-  border: 10;
-  border-color: rgb(171, 179, 179);
+  border: 10 rgb(171, 179, 179);
   color: aliceblue;
   outline: none;
   margin-left: 50px;
@@ -116,7 +115,6 @@ table {
 .login2 {
   background-color: blue;
   color: rgb(182, 168, 45);
-  padding-right: 10px;
   border-radius: 4px;
   margin-left: 10px;
   padding: 2px 10px;

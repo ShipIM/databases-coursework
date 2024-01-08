@@ -114,7 +114,7 @@ p {
 
 tr, td, th {
   border-radius: 12px;
-  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
+  background-image: url('~@/assets/image.jpg');
 }
 .alr {
   color: rgb(0, 0, 0);

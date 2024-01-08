@@ -30,21 +30,21 @@ export default {
 
 <style scoped>
 .name {
-background-color: rgb(0, 0, 0);
-border-radius: 0px;
-width: 10%;
-border-style: solid;
-border-width: 1px;
-border-color: rgb(54, 54, 54);
-padding: 2px 5px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 0px;
+  width: 10%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(54, 54, 54);
+  padding: 2px 5px;
 }
 .nelevel {
-background-color: rgb(0, 0, 0);
-border-radius: 0px;
-width: 10%;
-border-style: solid;
-border-width: 1px;
-border-color: rgb(54, 54, 54);
-padding: 2px 5px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 0px;
+  width: 10%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(54, 54, 54);
+  padding: 2px 5px;
 }
 </style>

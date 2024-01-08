@@ -373,7 +373,7 @@ td,
 th {
   border-radius: 12px;
   background-color: wheat;
-  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
+  background-image: url('~@/assets/image.jpg');
 }
 
 div.list-wrapper {
@@ -396,7 +396,6 @@ div.list-wrapper {
 .next3 {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -404,7 +403,6 @@ div.list-wrapper {
 .prev3 {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -412,7 +410,6 @@ div.list-wrapper {
 .next4 {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -421,7 +418,6 @@ div.list-wrapper {
 .prev4 {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;

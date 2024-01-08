@@ -227,7 +227,7 @@ p {
 
 tr, td, th {
   border-radius: 12px;
-  background-image: url("C:\Users\maryl\OneDrive\Изображения\image1.jpg");
+  background-image: url('~@/assets/image.jpg');
 }
 
 div.list-wrapper {
@@ -240,8 +240,7 @@ div.list-wrapper {
 
 #frame input {
   margin-top: 0px;
-  border: 10;
-  border-color: rgb(171, 179, 179);
+  border: 10 rgb(171, 179, 179);
   background-color: rgb(10, 6, 0);
   color: aliceblue;
   outline: none;
@@ -257,7 +256,6 @@ div.list-wrapper {
 .search2 {
   background-color: rgb(158, 0, 0);
   color: rgb(182, 168, 45);
-  padding-right: 20px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 15px;
@@ -265,7 +263,6 @@ div.list-wrapper {
 .reset2 {
   background-color: rgb(158, 0, 0);
   color: rgb(182, 168, 45);
-  padding-right: 20px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 15px;
@@ -273,7 +270,6 @@ div.list-wrapper {
 .next2 {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -281,7 +277,6 @@ div.list-wrapper {
 .previous2 {
   background-color: black;
   color: white;
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -289,5 +284,18 @@ div.list-wrapper {
 .categories2 {
   color: white;
   padding-left: 5px;
+}
+::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(34, 23, 14)
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0);
+  border-radius: 0px;
+  border: 1px solid rgb(54, 54, 54);
 }
 </style>

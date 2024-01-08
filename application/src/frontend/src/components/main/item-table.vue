@@ -114,15 +114,12 @@ div.table-wrapper {
 .quality {
   color: white;
   padding-left: 5px;
-  
 }
 
 .level {
   color: white;
   padding-right:30px;
   padding-left: 30px;
-
-
 }
 
 .items{

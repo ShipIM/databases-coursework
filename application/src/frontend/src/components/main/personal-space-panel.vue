@@ -41,7 +41,6 @@ export default {
 .login {
   background-color: blue;
   color: rgb(182, 168, 45);
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
@@ -54,15 +53,9 @@ export default {
 .logout {
   background-color: blue;
   color: rgb(182, 168, 45);
-  padding-right: 10px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 2px 10px;
 }
-
-
-
-
-
 
 </style>
